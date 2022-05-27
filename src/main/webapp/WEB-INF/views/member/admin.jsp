@@ -9,6 +9,7 @@
 <html>
 <head>
     <title>관리자용 페이지</title>
+    <link rel="stylesheet" href="/resources/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">

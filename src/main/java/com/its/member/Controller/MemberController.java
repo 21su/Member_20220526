@@ -76,7 +76,7 @@ public class MemberController {
         if(login != null){
             List<BoardDTO> boardList = boardService.findAll(page);
             PageDTO paging = boardService.paging(page);
-            model.addAttribute("boardDTO", boardList);
+            model.addAttribute("boardList", boardList);
             return "board/main";
         }else{
             return "member/login";
