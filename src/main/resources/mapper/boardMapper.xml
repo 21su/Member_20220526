@@ -5,9 +5,22 @@
 
 <mapper namespace="Board">
     <select id="count" parameterType="board" resultType="int">
-        select count(id) from board_table
+        select count(b_id) from board_table
     </select>
     <select id="findAll" parameterType="board" resultType="board">
-        select * from board_table order by id desc limit #{start}, #{limit}
+        select * from board_table order by b_id desc limit #{start}, #{limit}
     </select>
+    <select id="findFirst" resultType="board">
+        select * from board_table limit 0, 1
+    </select>
+    <insert id="save" parameterType="board">
+        insert into board_table (m_id, boardTitle, boardWriter, boardContents, boardCreatedDate, boardFileName)
+                    values (#{m_id}, #{boardTitle},#{boardWriter} ,#{boardContents}, now(), #{boardFileName})
+    </insert>
+    <select id="detail" parameterType="Long" resultType="board">
+        select * from board_table where b_id = #{b_id}
+    </select>
+    <update id="hits" parameterType="Long">
+        update board_table set boardHits = boardHits + 1 where b_id = #{b_id}
+    </update>
 </mapper>

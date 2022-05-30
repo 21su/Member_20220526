@@ -24,7 +24,6 @@
     <br />
 </div>
 <div class="container">
-    <button onclick="">글쓰기</button>
 </div>
 <div class="container">
     <table class="table">
@@ -38,13 +37,61 @@
         <c:forEach var="board" items="${boardList}">
             <tr>
                 <td>${board.b_id}</td>
-                <td>${board.boardTitle}</td>
-                <td>${board.writer}</td>
+                <td><a href="/board/detail?b_id=${board.b_id}&page=${paging.page}">${board.boardTitle}</a></td>
+                <td>${board.boardWriter}</td>
                 <td><fmt:formatDate pattern="yyyy-MM-dd hh:mm:ss" value="${board.boardCreatedDate}"></fmt:formatDate></td>
                 <td>${board.boardHits}</td>
             </tr>
         </c:forEach>
     </table>
+</div>
+<div class="container">
+    <ul class="pagination justify-content-center">
+        <c:choose>
+            <c:when test="${paging.page <= 1}">
+                <li class="page-item disabled">
+                    <a class="page-link">[이전]</a>
+                </li>
+            </c:when>
+            <c:otherwise>
+                <li class="page-item">
+                    <a href="/board/main?page=${paging.page-1}" class="page-link">[이전]</a>
+                </li>
+            </c:otherwise>
+        </c:choose>
+
+        <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="i" step="1">
+            <c:choose>
+                <c:when test="${i eq paging.page}">
+                    <li class="page-item active">
+                        <a class="page-link">${i}</a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item">
+                        <a class="page-link" href="/board/main?page=${i}">${i}</a>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+
+        <c:choose>
+            <c:when test="${paging.page >= paging.maxPage}">
+                <li class="page-item disabled">
+                    <a class="page-link">[다음]</a>
+                </li>
+            </c:when>
+            <c:otherwise>
+                <li class="page-item">
+                    <a class="page-link" href="/board/main?page=${paging.page+1}">[다음]</a>
+                </li>
+            </c:otherwise>
+        </c:choose>
+    </ul>
+</div>
+<div class="container">
+    <button onclick="location.href='/board/save'">글쓰기</button>&nbsp;
+    <button onclick="location.href='/'">메뉴</button>
 </div>
 </body>
 </html>

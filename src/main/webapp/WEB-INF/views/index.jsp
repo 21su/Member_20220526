@@ -22,7 +22,7 @@
             location.href="/member/login";
         }
         const main = () =>{
-            location.href="/member/main";
+            location.href="/board/main";
         }
         const detail = () =>{
             location.href="/member/detail";

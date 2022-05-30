@@ -62,26 +62,13 @@ public class MemberController {
             session.setAttribute("loginMemberId", loginDTO.getMemberId());
             session.setAttribute("loginMemberName", loginDTO.getMemberName());
             session.setAttribute("loginMemberProfileName", loginDTO.getMemberProfileName());
-            return "redirect:/member/main";
+            return "redirect:/board/main";
         }else{
             System.out.println("로그인 실패");
             return "/member/login";
         }
     }
 
-    @GetMapping("/main")
-    public String main(@RequestParam(value = "page", required = false, defaultValue = "1") int page
-            ,HttpSession session,Model model){
-        String login = (String)session.getAttribute("loginMemberId");
-        if(login != null){
-            List<BoardDTO> boardList = boardService.findAll(page);
-            PageDTO paging = boardService.paging(page);
-            model.addAttribute("boardList", boardList);
-            return "board/main";
-        }else{
-            return "member/login";
-        }
-    }
 
     @GetMapping("/logout")
     public String logout(HttpSession session){

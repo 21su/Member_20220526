@@ -19,4 +19,18 @@ public class BoardRepository {
     public List<BoardDTO> findAll(Map<String, Integer> pagingParam) {
         return sql.selectList("Board.findAll",pagingParam);
     }
+
+    public BoardDTO findFirst() {
+        return sql.selectOne("Board.findFirst");
+    }
+
+    public void save(BoardDTO boardDTO) {
+        System.out.println("BoardRepository.save");
+        sql.insert("Board.save", boardDTO);
+    }
+
+    public BoardDTO detail(Long b_id) {
+        sql.update("Board.hits", b_id);
+        return sql.selectOne("Board.detail", b_id);
+    }
 }

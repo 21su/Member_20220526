@@ -1,11 +1,59 @@
 package com.its.member.Controller;
 
+import com.its.member.DTO.BoardDTO;
+import com.its.member.DTO.PageDTO;
+import com.its.member.Service.BoardService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.util.List;
 
 @Controller
 @RequestMapping("/board")
 public class BoardController {
+    @Autowired
+    BoardService boardService;
 
+    @GetMapping("/main")
+    public String main(@RequestParam(value = "page", required = false, defaultValue = "1") int page
+            , HttpSession session, Model model){
+        String login = (String)session.getAttribute("loginMemberId");
+        BoardDTO boardFirstDTO = boardService.findFirst();
+        if(login != null){
+            if(boardFirstDTO == null){
+                return "board/save";
+            }
+            List<BoardDTO> boardList = boardService.findAll(page);
+            PageDTO paging = boardService.paging(page);
+            model.addAttribute("boardList", boardList);
+            model.addAttribute("paging",paging);
+            return "board/main";
+        }else{
+            return "member/login";
+        }
+    }
+
+    @GetMapping("/save")
+    public String saveForm(){
+        return "/board/save";
+    }
+
+    @PostMapping("/save")
+    public String save(@ModelAttribute BoardDTO boardDTO) throws IOException {
+        System.out.println(boardDTO);
+        boardService.save(boardDTO);
+        return "redirect:/board/main";
+    }
+
+    @GetMapping("/detail")
+    public String detail(@RequestParam("b_id") Long b_id,int page, Model model){
+        BoardDTO boardDTO = boardService.detail(b_id);
+        model.addAttribute("boardDTO", boardDTO);
+        model.addAttribute("page", page);
+        return "/board/detail";
+    }
 }

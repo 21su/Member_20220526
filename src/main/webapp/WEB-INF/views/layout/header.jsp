@@ -29,13 +29,14 @@
                 <span>${sessionScope.loginMemberName}님 환영합니다.</span>&nbsp;&nbsp;
                 <a href="/member/logout">로그아웃</a>&nbsp;&nbsp;
                 <a href="/member/detail">마이 페이지</a>&nbsp;&nbsp;
+                <a href="/board/save">글쓰기</a>&nbsp;&nbsp;
             </c:when>
             <c:otherwise>
                 <a href="/member/login">로그인</a>&nbsp;&nbsp;
                 <a href="/member/save">회원 가입</a>&nbsp;&nbsp;
             </c:otherwise>
         </c:choose>
-        <a href="/member/main">게시글</a>&nbsp;&nbsp;
+        <a href="/board/main">게시글</a>&nbsp;&nbsp;
         <a href="/">메인</a>&nbsp;&nbsp;
     </header>
 </body>

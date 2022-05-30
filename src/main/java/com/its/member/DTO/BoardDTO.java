@@ -14,8 +14,8 @@ public class BoardDTO {
     private Long b_id;
     private Long m_id;
     private String boardTitle;
-    private String Writer;
-    private String Contents;
+    private String boardWriter;
+    private String boardContents;
     private int boardHits;
     private Timestamp boardCreatedDate;
     private MultipartFile boardFile;

@@ -5,7 +5,10 @@ import com.its.member.DTO.PageDTO;
 import com.its.member.Repository.BoardRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -41,5 +44,26 @@ public class BoardService {
         pagingParam.put("limit",PAGE_LIMIT);
         List<BoardDTO> pagingList = boardRepository.findAll(pagingParam);
         return pagingList;
+    }
+
+    public BoardDTO findFirst() {
+        return boardRepository.findFirst();
+    }
+
+    public void save(BoardDTO boardDTO) throws IOException {
+        MultipartFile boardFile = boardDTO.getBoardFile();
+        String boardFileName = boardFile.getOriginalFilename();
+        boardFileName = System.currentTimeMillis() + "-" + boardFileName;
+        boardDTO.setBoardFileName(boardFileName);
+        String savePath = "D:\\spring_img\\" + boardFileName;
+        if (!boardFile.isEmpty()){
+            boardFile.transferTo((new File(savePath)));
+        }
+        System.out.println("BoardService.save");
+        boardRepository.save(boardDTO);
+    }
+
+    public BoardDTO detail(Long b_id) {
+        return boardRepository.detail(b_id);
     }
 }
