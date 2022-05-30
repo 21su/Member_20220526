@@ -38,19 +38,20 @@ public class BoardController {
     }
 
     @GetMapping("/save")
-    public String saveForm(){
+    public String save(){
         return "/board/save";
     }
 
     @PostMapping("/save")
-    public String save(@ModelAttribute BoardDTO boardDTO) throws IOException {
+    public String saveForm(@ModelAttribute BoardDTO boardDTO) throws IOException {
         System.out.println(boardDTO);
         boardService.save(boardDTO);
         return "redirect:/board/main";
     }
 
     @GetMapping("/detail")
-    public String detail(@RequestParam("b_id") Long b_id,int page, Model model){
+    public String detail(@RequestParam("b_id") Long b_id,
+                         @RequestParam("page") int page, Model model){
         BoardDTO boardDTO = boardService.detail(b_id);
         model.addAttribute("boardDTO", boardDTO);
         model.addAttribute("page", page);
@@ -61,5 +62,26 @@ public class BoardController {
     public String deleteBoard(@ModelAttribute("b_id") Long b_id){
         boardService.deleteBoard(b_id);
         return "redirect:/board/main";
+    }
+
+    @GetMapping("/updateBoard")
+    public String updateBoard(@RequestParam("b_id") Long b_id,
+                              @RequestParam("page") int page,
+                              Model model){
+        BoardDTO boardDTO = boardService.detail(b_id);
+        model.addAttribute("boardDTO", boardDTO);
+        model.addAttribute("page", page);
+        return "/board/updateBoard";
+    }
+
+    @PostMapping("/updateBoard")
+    public String updateBoardForm(@ModelAttribute BoardDTO boardDTO,
+                                  @RequestParam("page") int page,
+                                  Model model){
+        boardService.updateBoard(boardDTO);
+        BoardDTO boardDTO1 = boardService.detail(boardDTO.getB_id());
+        model.addAttribute("boardDTO",boardDTO1);
+        model.addAttribute("page", page);
+        return "/board/detail";
     }
 }

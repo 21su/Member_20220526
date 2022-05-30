@@ -23,7 +23,7 @@
             }
         }
         const updateBoard = () =>{
-
+            location.href = "/board/updateBoard?b_id=${boardDTO.b_id}&page=${page}";
         }
         const deleteBoard = () =>{
             location.href = "/board/deleteBoard?b_id=${boardDTO.b_id}";

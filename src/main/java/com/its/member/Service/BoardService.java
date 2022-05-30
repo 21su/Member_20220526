@@ -64,10 +64,15 @@ public class BoardService {
     }
 
     public BoardDTO detail(Long b_id) {
+        boardRepository.hits(b_id);
         return boardRepository.detail(b_id);
     }
 
     public void deleteBoard(Long b_id) {
         boardRepository.deleteBoard(b_id);
+    }
+
+    public void updateBoard(BoardDTO boardDTO) {
+        boardRepository.updateBoard(boardDTO);
     }
 }
