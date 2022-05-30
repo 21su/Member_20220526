@@ -45,7 +45,7 @@ public class MemberController {
     }
 
     @PostMapping("/loginCheck")
-    public @ResponseBody boolean roginCheck(@ModelAttribute MemberDTO loginDTO){
+    public @ResponseBody boolean loginCheck(@ModelAttribute MemberDTO loginDTO){
         MemberDTO memberLogin = memberService.loginCheck(loginDTO);
         if(memberLogin != null){
             return true;
