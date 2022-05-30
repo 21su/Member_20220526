@@ -44,4 +44,8 @@ public class BoardRepository {
     public void updateBoard(BoardDTO boardDTO) {
         sql.update("Board.updateBoard", boardDTO);
     }
+
+    public List<BoardDTO> search(Map<String, String> map) {
+        return sql.selectList("Board.search", map);
+    }
 }

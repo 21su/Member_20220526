@@ -93,5 +93,16 @@
     <button onclick="location.href='/board/save'">글쓰기</button>&nbsp;
     <button onclick="location.href='/'">메뉴</button>
 </div>
+<br />
+<div class="container">
+    <form method="get" action="/board/search">
+        <select name="type">
+            <option value="boardWriter">글쓴이</option>
+            <option value="boardTitle">제목</option>
+        </select>
+        <input type="text" name="search" placeholder="검색어 입력">
+        <input type="submit" value="검색">
+    </form>
+</div>
 </body>
 </html>

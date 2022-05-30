@@ -27,6 +27,9 @@
         delete from board_table where b_id = #{b_id};
     </delete>
     <update id="updateBoard" parameterType="board">
-        update board_table set boardTitle = #{boardTitle}, boardContents = #{boardContents} where b_id = #{b_id}
+        update board_table set boardWriter = #{boardWriter}, boardTitle = #{boardTitle} where b_id = #{b_id}
     </update>
+    <select id="search" parameterType="board" resultType="board">
+        select * from board_table where ${type} like concat('%' , #{search} , '%') order by b_id desc
+    </select>
 </mapper>
