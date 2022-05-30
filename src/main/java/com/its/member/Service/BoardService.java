@@ -66,4 +66,8 @@ public class BoardService {
     public BoardDTO detail(Long b_id) {
         return boardRepository.detail(b_id);
     }
+
+    public void deleteBoard(Long b_id) {
+        boardRepository.deleteBoard(b_id);
+    }
 }

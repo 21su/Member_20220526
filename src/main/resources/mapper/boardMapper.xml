@@ -23,4 +23,7 @@
     <update id="hits" parameterType="Long">
         update board_table set boardHits = boardHits + 1 where b_id = #{b_id}
     </update>
+    <delete id="deleteBoard" parameterType="Long">
+        delete from board_table where b_id = #{b_id};
+    </delete>
 </mapper>

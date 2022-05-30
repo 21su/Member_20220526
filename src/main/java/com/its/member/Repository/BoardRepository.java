@@ -33,4 +33,8 @@ public class BoardRepository {
         sql.update("Board.hits", b_id);
         return sql.selectOne("Board.detail", b_id);
     }
+
+    public void deleteBoard(Long b_id) {
+        sql.delete("Board.deleteBoard",b_id);
+    }
 }

@@ -26,7 +26,7 @@
 
         }
         const deleteBoard = () =>{
-
+            location.href = "/board/deleteBoard?b_id=${boardDTO.b_id}";
         }
     </script>
 </head>

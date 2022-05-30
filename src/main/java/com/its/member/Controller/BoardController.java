@@ -56,4 +56,10 @@ public class BoardController {
         model.addAttribute("page", page);
         return "/board/detail";
     }
+
+    @GetMapping("/deleteBoard")
+    public String deleteBoard(@ModelAttribute("b_id") Long b_id){
+        boardService.deleteBoard(b_id);
+        return "redirect:/board/main";
+    }
 }
