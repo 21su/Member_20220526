@@ -1,8 +1,10 @@
 package com.its.member.Controller;
 
 import com.its.member.DTO.BoardDTO;
+import com.its.member.DTO.CommentDTO;
 import com.its.member.DTO.PageDTO;
 import com.its.member.Service.BoardService;
+import com.its.member.Service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,8 @@ import java.util.List;
 public class BoardController {
     @Autowired
     BoardService boardService;
+    @Autowired
+    CommentService commentService;
 
     @GetMapping("/main")
     public String main(@RequestParam(value = "page", required = false, defaultValue = "1") int page
@@ -44,7 +48,6 @@ public class BoardController {
 
     @PostMapping("/save")
     public String saveForm(@ModelAttribute BoardDTO boardDTO) throws IOException {
-        System.out.println(boardDTO);
         boardService.save(boardDTO);
         return "redirect:/board/main";
     }
@@ -55,6 +58,9 @@ public class BoardController {
         BoardDTO boardDTO = boardService.detail(b_id);
         model.addAttribute("boardDTO", boardDTO);
         model.addAttribute("page", page);
+
+        List<CommentDTO> commentList = commentService.findAll(b_id);
+        model.addAttribute("commentList", commentList);
         return "/board/detail";
     }
 

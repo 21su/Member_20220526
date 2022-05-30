@@ -18,7 +18,7 @@ public class BoardService {
     @Autowired
     BoardRepository boardRepository;
 
-    static final int PAGE_LIMIT = 3;
+    static final int PAGE_LIMIT = 5;
     static final int BLOCK_LIMIT = 3;
 
     public PageDTO paging(int page) {
