@@ -42,12 +42,12 @@ public class BoardController {
     }
 
     @GetMapping("/save")
-    public String save(){
+    public String saveForm(){
         return "/board/save";
     }
 
     @PostMapping("/save")
-    public String saveForm(@ModelAttribute BoardDTO boardDTO) throws IOException {
+    public String save(@ModelAttribute BoardDTO boardDTO) throws IOException {
         boardService.save(boardDTO);
         return "redirect:/board/main";
     }
@@ -71,7 +71,7 @@ public class BoardController {
     }
 
     @GetMapping("/updateBoard")
-    public String updateBoard(@RequestParam("b_id") Long b_id,
+    public String updateBoardForm(@RequestParam("b_id") Long b_id,
                               @RequestParam("page") int page,
                               Model model){
         BoardDTO boardDTO = boardService.detail(b_id);
@@ -81,7 +81,7 @@ public class BoardController {
     }
 
     @PostMapping("/updateBoard")
-    public String updateBoardForm(@ModelAttribute BoardDTO boardDTO,
+    public String updateBoard(@ModelAttribute BoardDTO boardDTO,
                                   @RequestParam("page") int page,
                                   Model model){
         boardService.updateBoard(boardDTO);
